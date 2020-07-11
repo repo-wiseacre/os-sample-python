@@ -1,1 +1,1 @@
-APP_CONFIG=wsgi.py
+APP_CONFIG=config.py
