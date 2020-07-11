@@ -1,4 +1,4 @@
-pip
+https://files.pythonhosted.org/packages/45/1e/0c169c6a5381e241ba7404532c16a21d86ab872c9bed8bdcd4c423954103/requests-2.24.0-py2.py3-none-any.whl
 requests
 gunicorn
 Flask
