@@ -8,7 +8,7 @@ application = Flask(__name__)
 @application.route('/')
 def hello():
     print("hello called....")
-    response  = requests.get("http://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=439d4b804bc8187953eb36d2a8c26a02")
+    response  = requests.get("https://api.covid19india.org/data.json")
     print("Hello world!")
     print(response.json())
     weatherreport = response.json()
@@ -19,7 +19,12 @@ def hello():
     html_snippet = "<head><title>HTML in 10 Simple Steps or Less</title><meta http-equiv='refresh' content='5' /></head><body><table><tr><td>weather cords</td></tr><tr><td>longitude: </td><td>{var1:}</td></tr><tr><td>lattitude: </td><td>{var2:}</td></tr></table></body>"
 
     print()
-
+    
+    for covid in data['statewise']:
+        covidkeys = covid.keys()
+        for key in covidkeys
+        html_snippet=html_snippet,covid[key]
+    
     return html_snippet.format(var1=cords["lon"], var2=cords["lat"])
 
 if __name__ == '__main__':
