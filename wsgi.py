@@ -2,10 +2,10 @@ from flask import Flask
 import requests
 import json
 
-app = Flask(__name__)
+application = Flask(__name__)
 
 
-@app.route('/')
+@application.route('/')
 def hello():
     print("hello called....")
     response  = requests.get("http://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=439d4b804bc8187953eb36d2a8c26a02")
