@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from flask import Flask
 from flask import request
 import requests
@@ -78,27 +80,16 @@ def covid():
 
     formattedhtml_snippet = html_snippet.format(heading="statewise", select=formatteddropdown ,innerHTMLS=dict_innerHTML["TT"])
 
-    
     #print(html_snippet)
 
     #html_snippet="<body><table><tr><td>covid results</td></tr>"+innerHTML+"</table></body>"
-    
-    #!/usr/bin/env python
 
-
-    connection = pika.BlockingConnection(
-        pika.ConnectionParameters(host = os.environ.get('CLOUDAMQP_URI'))
+    connection = pika.BlockingConnection(pika.URLParameters(os.environ.get("CLOUDAMQP_URI")))
     channel = connection.channel()
 
-    channel.queue_declare(queue='sample_rabbit_queue')
+    channel.queue_declare(queue='sample_rabbit_queue', durable=True)
 
-
-    def callback(ch, method, properties, body):
-        print(" [x] Received %r" % body)
-
-
-    channel.basic_consume(
-        queue='hello', on_message_callback=callback, auto_ack=True)
+    channel.basic_consume(queue='sample_rabbit_queue', on_message_callback=callback, auto_ack=True)
 
     print(' [*] Waiting for messages. To exit press CTRL+C')
     channel.start_consuming()
@@ -106,6 +97,10 @@ def covid():
     
     
     return formattedhtml_snippet
+
+def callback(ch, method, properties, body):
+    print(" [x] Received %r" % body)
+
 
 if __name__ == '__main__':
     application.run()
