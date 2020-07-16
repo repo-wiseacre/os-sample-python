@@ -86,10 +86,10 @@ def covid():
 
 
     connection = pika.BlockingConnection(
-        pika.ConnectionParameters(host=process.env.CLOUDAMQP_URI))
+        pika.ConnectionParameters(host = process.env.CLOUDAMQP_URI))
     channel = connection.channel()
 
-    channel.queue_declare(queue='hello')
+    channel.queue_declare(queue='sample_rabbit_queue')
 
 
     def callback(ch, method, properties, body):
