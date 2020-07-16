@@ -2,6 +2,7 @@ from flask import Flask
 from flask import request
 import requests
 import json
+import pika
 
 application = Flask(__name__)
 
@@ -80,6 +81,29 @@ def covid():
     #print(html_snippet)
 
     #html_snippet="<body><table><tr><td>covid results</td></tr>"+innerHTML+"</table></body>"
+    
+    #!/usr/bin/env python
+
+
+    connection = pika.BlockingConnection(
+        pika.ConnectionParameters(host=process.env.CLOUDAMQP_URI))
+    channel = connection.channel()
+
+    channel.queue_declare(queue='hello')
+
+
+    def callback(ch, method, properties, body):
+        print(" [x] Received %r" % body)
+
+
+    channel.basic_consume(
+        queue='hello', on_message_callback=callback, auto_ack=True)
+
+    print(' [*] Waiting for messages. To exit press CTRL+C')
+    channel.start_consuming()
+    
+    
+    
     return formattedhtml_snippet
 
 if __name__ == '__main__':
