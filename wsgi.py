@@ -3,6 +3,7 @@ from flask import request
 import requests
 import json
 import pika
+import os
 
 application = Flask(__name__)
 
@@ -86,7 +87,7 @@ def covid():
 
 
     connection = pika.BlockingConnection(
-        pika.ConnectionParameters(host = process.env.CLOUDAMQP_URI))
+        pika.ConnectionParameters(host = os.environ.get('CLOUDAMQP_URI'))
     channel = connection.channel()
 
     channel.queue_declare(queue='sample_rabbit_queue')
