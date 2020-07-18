@@ -68,7 +68,7 @@ def covidDataUpdate():
     return json.dumps({'errors': "errors"})
 
 @application.route('/raw', methods=['get'])
-def covidDataUpdate():
+def getcovidDataUpdate():
     print(type(request))
     print(type(request.args.get('raw')))
     #print(type(request.form[0]))
