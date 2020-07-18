@@ -9,8 +9,8 @@ class publish:
 
     def __init__(self,queue_name):
         self.response = requests.get("https://api.covid19india.org/data.json")
-        #self.connection = pika.BlockingConnection(pika.URLParameters("amqp://fovucomg:iXDPcLo0zLE4tcjYU-fKZAIyxeXv2143@codfish.rmq.cloudamqp.com/fovucomg"))
-        self.connection = pika.BlockingConnection(pika.URLParameters(os.environ.get("CLOUDAMQP_URI")))
+        self.connection = pika.BlockingConnection(pika.URLParameters("amqp://fovucomg:iXDPcLo0zLE4tcjYU-fKZAIyxeXv2143@codfish.rmq.cloudamqp.com/fovucomg"))
+        #self.connection = pika.BlockingConnection(pika.URLParameters(os.environ.get("CLOUDAMQP_URI"))
         self.channel = self.connection.channel()
         self.channel.queue_declare(queue=queue_name, durable=True)
 
@@ -26,8 +26,20 @@ class publish:
         print(" [x] Received %r" % body)
         #self.response = body
         self.callAPI()
+        #if type(self.response) is dict :
+            #print("dict")
+        #print(type(json.dumps(self.response.json())))
+        #print(json.dumps(self.response))
         
-        response = requests.post("http://localhost:5000/raw",data=self.response)
+        #print(colored(response.json(),'green','on_red'))
+        #param={'raw':'aaaaa'}
+        #strURI="http://flask-requests-json-meessage.apps.us-east-1.starter.openshift-online.com/raw?raw={params}"
+        #formattedstrURI = strURI.format(params=json.dumps(self.response.json()))
+        #print(formattedstrURI)
+        #response = requests.get(formattedstrURI)
+        #print(type(response))        
+        #print(colored(str(response),'green','on_red'))
+
 
 
     def callAPI(self):
@@ -36,11 +48,30 @@ class publish:
         #print(new_response.json())
         old_response = self.response
         #print(old_response)
-        result = old_response if json.dumps(old_response.json()) == json.dumps(new_response.json()) else new_response.json()
-        print(colored('Updated', 'green', 'on_white'))
+        result = self.assignResponse(old_response,'same') if json.dumps(old_response.json()) == json.dumps(new_response.json()) else self.assignResponse(new_response, 'updated')
+        
         self.response = result
         
+    def assignResponse(self,returns, status):
+        from datetime import datetime
+        # datetime object containing current date and time
+        now = datetime.now()
+        print("now =", now)
+        # dd/mm/YY H:M:S
+        dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+        print("date and time =", dt_string)	
+        print(colored(status+':'+dt_string, 'green', 'on_white'))
 
+        if status=="updted" :
+            self.callServerAPI()
+
+        return returns
+
+    def callServerAPI(self):
+        parampost = "{params}"
+        formattedparam = parampost.format(params = json.dumps(self.response.json()))
+        param={'raw':formattedparam}
+        response = requests.post("http://flask-requests-json-meessage.apps.us-east-1.starter.openshift-online.com/rawpost",data=param)
 
 def main(argv):
     print("argvs ",argv)
