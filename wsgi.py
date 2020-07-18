@@ -69,7 +69,7 @@ def covidDataUpdate():
 
 @application.route('/raw', methods=['GET'])
 def getcovidDataUpdate():
-    print(colored('inside get>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',green, on_black))
+    print(colored('inside get>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>','green', 'on_black'))
     print(type(request))
     print(type(request.args.get('raw')))
     #print(type(request.form[0]))
