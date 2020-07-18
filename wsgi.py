@@ -67,7 +67,7 @@ def covidDataUpdate():
     
     return json.dumps({'errors': "errors"})
 
-@application.route('/raw', methods=['get'])
+@application.route('/raw', methods=['GET'])
 def getcovidDataUpdate():
     print(colored('inside get>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',green, on_black))
     print(type(request))
