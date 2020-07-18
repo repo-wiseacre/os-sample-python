@@ -10,7 +10,7 @@ class publish:
     def __init__(self,queue_name):
         self.response = requests.get("https://api.covid19india.org/data.json")
         #self.connection = pika.BlockingConnection(pika.URLParameters("amqp://fovucomg:iXDPcLo0zLE4tcjYU-fKZAIyxeXv2143@codfish.rmq.cloudamqp.com/fovucomg"))
-        self.connection = pika.BlockingConnection(pika.URLParameters(os.environ.get("CLOUDAMQP_URI"))
+        self.connection = pika.BlockingConnection(pika.URLParameters(os.environ.get("CLOUDAMQP_URI")))
         self.channel = self.connection.channel()
         self.channel.queue_declare(queue=queue_name, durable=True)
 
