@@ -72,7 +72,7 @@ def covidDataUpdate():
     print(type(request))
     print(type(request.args.get('raw')))
     #print(type(request.form[0]))
-    print(request.args.get('raw')))
+    print(request.args.get('raw'))
     print(json.dumps(request.args.get('raw')))
     raw=json.dumps(request.args.get('raw'))
     print(colored(raw, 'red', 'on_white')) # should display 'bar'
