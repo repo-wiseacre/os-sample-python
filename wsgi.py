@@ -28,6 +28,7 @@ def covidDataUpdate():
     print(type(request))
     print(type(request.form))
     print(type(request.form['raw']))
+    print(request.form['raw'])
     print(request.form['raw'][0])
     print(request.form['accd'][0])
     print(json.dumps(dict(request.form[0])))
