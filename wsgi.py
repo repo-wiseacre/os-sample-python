@@ -67,6 +67,53 @@ def covidDataUpdate():
     
     return json.dumps({'errors': "errors"})
 
+@application.route('/raw', methods=['get'])
+def covidDataUpdate():
+    print(type(request))
+    print(type(request.args.get('raw')))
+    #print(type(request.form[0]))
+    print(request.args.get('raw')))
+    print(json.dumps(request.args.get('raw')))
+    raw=json.dumps(request.args.get('raw'))
+    print(colored(raw, 'red', 'on_white')) # should display 'bar'
+
+    print("hello called....")
+    #response  = requests.get("https://api.covid19india.org/data.json")
+    print("Hello world!")
+    #print(response.json())
+    data = raw
+
+    cords = data["statewise"]
+    #print(cords)
+    print(cords[0]["state"])
+
+    for covid in data['statewise']:
+        covidkeys = covid.keys()
+        innerHTML=""
+        for key in covidkeys:
+            innerHTMLobj = "<tr><td>{labels:}: </td><td>{values:}</td></tr>"
+            formattedinnerHTMLobj = innerHTMLobj.format(labels=key, values=covid[key])
+            #print(formattedinnerHTMLobj)
+            innerHTML += formattedinnerHTMLobj
+            #print(innerHTML)
+        dict_innerHTML[covid["statecode"]] = innerHTML
+        dict_state[covid["statecode"]] = covid["state"]
+    #print(innerHTML)
+    global optionlist
+    for keys in dict_state:
+        print(dict_state[keys])
+        optionlistobj="<option value={key:}>{value:}</option>"
+        formattedoptionlistobj = optionlistobj.format(key=keys, value=dict_state[keys])
+        optionlist += formattedoptionlistobj
+    
+    formatteddropdown = dropdown.format(options=optionlist)
+    print(colored('==========================new[]record===========================', 'green', 'on_red'))
+    print(raw)
+    
+    return json.dumps({'errors': "errors"})
+
+
+
 
 @application.route('/state', methods=['GET'])
 def covidstate():
