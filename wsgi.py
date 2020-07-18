@@ -27,8 +27,8 @@ def covidDataUpdate():
     print(colored('inside covidDataUpdate', 'green', 'on_red'))
     print(type(request))
     print(type(request.form))
-    print(type(request.form[0]))
-    print(request.form[0])
+    print(type(request.form['raw']))
+    print(request.form['raw'][0])
     print(json.dumps(dict(request.form[0])))
     raw=json.dumps(dict(request.form[0]))
     print(colored(request, 'red', 'on_white')) # should display 'bar'
