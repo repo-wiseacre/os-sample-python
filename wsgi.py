@@ -22,7 +22,7 @@ optionlist = ""
 formatteddropdown = ""
 
 
-@application.route('/raw', methods=['POST'])
+@application.route('/rawpost', methods=['POST'])
 def covidDataUpdate():
     print(type(request))
     print(type(request.form))
