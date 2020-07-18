@@ -24,6 +24,7 @@ formatteddropdown = ""
 
 @application.route('/rawpost', methods=['POST'])
 def covidDataUpdate():
+    print(colored('inside covidDataUpdate', 'green', 'on_red')
     print(type(request))
     print(type(request.form))
     print(type(request.form[0]))
