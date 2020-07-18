@@ -126,7 +126,7 @@ def covidstate():
     statename = dict_state[statecode]
     print(statename)
     innerHTML = dict_innerHTML[statecode]
-    #print(innerHTML)
+    print(innerHTML)
     html_snippet = "<head><title>HTML in 10 Simple Steps or Less</title><meta http-equiv='refresh' content='5' /></head>"
     #html_snippet = ""
     html_snippet+="<head>covid results {heading:}</head><body><table><tr><td>Select state </td></tr>{select:}{innerHTMLS:}</table></body>"
