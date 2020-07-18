@@ -60,7 +60,7 @@ def covidDataUpdate():
     print(colored('==========================new[]record===========================', 'green', 'on_red'))
     print(raw)
     
-    return "updated"
+    return json.dumps({'errors': "errors"})
 
 
 @application.route('/state', methods=['GET'])
