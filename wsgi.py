@@ -4,11 +4,12 @@ from flask import Flask
 from flask import request
 import requests
 import json
-import pika
-import os
+import subprocess
+from termcolor import colored
+
+from punisher import publish
 
 application = Flask(__name__)
-
 
 
 innerHTML = ""
@@ -21,6 +22,46 @@ optionlist = ""
 formatteddropdown = ""
 
 
+@application.route('/raw', methods=['POST'])
+def covidDataUpdate():
+    raw=request.form
+    print(request.form) # should display 'bar'
+
+    print("hello called....")
+    #response  = requests.get("https://api.covid19india.org/data.json")
+    print("Hello world!")
+    #print(response.json())
+    data = raw
+
+    cords = data["statewise"]
+    #print(cords)
+    print(cords[0]["state"])
+
+    for covid in data['statewise']:
+        covidkeys = covid.keys()
+        innerHTML=""
+        for key in covidkeys:
+            innerHTMLobj = "<tr><td>{labels:}: </td><td>{values:}</td></tr>"
+            formattedinnerHTMLobj = innerHTMLobj.format(labels=key, values=covid[key])
+            #print(formattedinnerHTMLobj)
+            innerHTML += formattedinnerHTMLobj
+            #print(innerHTML)
+        dict_innerHTML[covid["statecode"]] = innerHTML
+        dict_state[covid["statecode"]] = covid["state"]
+    #print(innerHTML)
+    global optionlist
+    for keys in dict_state:
+        print(dict_state[keys])
+        optionlistobj="<option value={key:}>{value:}</option>"
+        formattedoptionlistobj = optionlistobj.format(key=keys, value=dict_state[keys])
+        optionlist += formattedoptionlistobj
+    
+    formatteddropdown = dropdown.format(options=optionlist)
+    print(colored('==========================new[]record===========================', 'green', 'on_red'))
+    print(raw)
+    
+    return "updated"
+
 
 @application.route('/state', methods=['GET'])
 def covidstate():
@@ -30,7 +71,7 @@ def covidstate():
     statename = dict_state[statecode]
     print(statename)
     innerHTML = dict_innerHTML[statecode]
-    print(innerHTML)
+    #print(innerHTML)
     html_snippet = "<head><title>HTML in 10 Simple Steps or Less</title><meta http-equiv='refresh' content='5' /></head>"
     #html_snippet = ""
     html_snippet+="<head>covid results {heading:}</head><body><table><tr><td>Select state </td></tr>{select:}{innerHTMLS:}</table></body>"
@@ -67,7 +108,7 @@ def covid():
     #print(innerHTML)
     global optionlist
     for keys in dict_state:
-        print(dict_state[keys])
+        #print(dict_state[keys])
         optionlistobj="<option value={key:}>{value:}</option>"
         formattedoptionlistobj = optionlistobj.format(key=keys, value=dict_state[keys])
         optionlist += formattedoptionlistobj
@@ -83,23 +124,16 @@ def covid():
     #print(html_snippet)
 
     #html_snippet="<body><table><tr><td>covid results</td></tr>"+innerHTML+"</table></body>"
+    #out = subprocess.Popen(['python', 'punisher.py', 'start'], 
+    #       stdout=subprocess.PIPE, 
+    #       stderr=subprocess.STDOUT)
 
-    connection = pika.BlockingConnection(pika.URLParameters(os.environ.get("CLOUDAMQP_URI")))
-    channel = connection.channel()
-
-    channel.queue_declare(queue='sample_rabbit_queue', durable=True)
-
-    channel.basic_consume(queue='sample_rabbit_queue', on_message_callback=callback, auto_ack=True)
-
-    print(' [*] Waiting for messages. To exit press CTRL+C')
-    channel.start_consuming()
-    
-    
+    #stdout,stderr = out.communicate()
+    #print(stdout)
+    #print(stderr)
     
     return formattedhtml_snippet
 
-def callback(ch, method, properties, body):
-    print(" [x] Received %r" % body)
 
 
 if __name__ == '__main__':
