@@ -25,7 +25,7 @@ formatteddropdown = ""
 @application.route('/raw', methods=['POST'])
 def covidDataUpdate():
     raw=request.form
-    print(colored(request.form, 'black', 'on_white')) # should display 'bar'
+    print(colored(request, 'red', 'on_white')) # should display 'bar'
 
     print("hello called....")
     #response  = requests.get("https://api.covid19india.org/data.json")
