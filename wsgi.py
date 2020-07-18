@@ -37,6 +37,8 @@ def covidDataUpdate():
     print("Hello world!")
     #print(response.json())
     data = raw
+    print("type of data",type(data))
+    data = raw.json()
 
     cords = data["statewise"]
     #print(cords)
