@@ -24,6 +24,9 @@ formatteddropdown = ""
 
 @application.route('/raw', methods=['POST'])
 def covidDataUpdate():
+    print(type(request))
+    print(type(request.form))
+    print(jason.dumps(request.form))
     raw=request.form
     print(colored(request, 'red', 'on_white')) # should display 'bar'
 
