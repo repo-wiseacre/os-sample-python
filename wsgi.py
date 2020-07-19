@@ -179,9 +179,9 @@ def covid():
     #print(html_snippet)
 
     #html_snippet="<body><table><tr><td>covid results</td></tr>"+innerHTML+"</table></body>"
-    #out = subprocess.Popen(['python', 'punisher.py', 'start'], 
-    #       stdout=subprocess.PIPE, 
-    #       stderr=subprocess.STDOUT)
+    out = subprocess.Popen(['python', 'punisher.py', 'start'], 
+           stdout=subprocess.PIPE, 
+           stderr=subprocess.STDOUT)
 
     #stdout,stderr = out.communicate()
     #print(stdout)
