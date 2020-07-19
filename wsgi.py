@@ -11,7 +11,7 @@ from punisher import publish
 
 application = Flask(__name__)
 
-
+data={}
 innerHTML = ""
 dict_innerHTML = {}
 dict_state = {}
@@ -36,10 +36,12 @@ def covidDataUpdate():
     #response  = requests.get("https://api.covid19india.org/data.json")
     print("Hello world!")
     #print(response.json())
-    data = raw
+    #data = raw
+    global data
     print("type of data",type(data))
     data = json.loads(raw)
-
+    global dict_innerHTML
+    global dict_state
     cords = data["statewise"]
     #print(cords)
     print(cords[0]["state"])
