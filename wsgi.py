@@ -11,10 +11,10 @@ from punisher import publish
 
 application = Flask(__name__)
 
-data={}
-innerHTML = ""
-dict_innerHTML = {}
-dict_state = {}
+#data={}
+#innerHTML = ""
+#dict_innerHTML = {}
+#dict_state = {}
 
 dropdown = "<tr><td><select class='dropdown' name='stateOption' id='idStateOption'>{options:}</select></td><tr>"
 optionlist = ""
@@ -59,7 +59,10 @@ def covidDataUpdate():
             innerHTML += formattedinnerHTMLobj
             #print(innerHTML)
         dict_innerHTML[covid["statecode"]] = innerHTML
+        
         dict_state[covid["statecode"]] = covid["state"]
+    #print(innerHTML)
+    
     #print(innerHTML)
     global optionlist
     for keys in dict_state:
