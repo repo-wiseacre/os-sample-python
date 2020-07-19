@@ -38,10 +38,13 @@ def covidDataUpdate():
     #print(response.json())
     #data = raw
     global data
+    data.clear()
     print("type of data",type(data))
     data = json.loads(raw)
     global dict_innerHTML
+    dict_innerHTML.clear()
     global dict_state
+    dict_state.clear()
     cords = data["statewise"]
     #print(cords)
     print(cords[0]["state"])
