@@ -151,7 +151,7 @@ def covid():
     print("Hello world!")
     #print(response.json())
     data = response.json()
-
+    session['data'] = data
     cords = data["statewise"]
     #print(cords)
     print(cords[0]["state"])
