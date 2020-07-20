@@ -97,7 +97,7 @@ def getcovidDataUpdate():
 
 @application.route('/state', methods=['GET'])
 def covidstate():
-    data = session['data'].json()
+    data = json.load(session['data'])
     cords = data["statewise"]
     #print(cords)
     print(cords[0]["state"])
@@ -151,7 +151,7 @@ def covid():
     print("Hello world!")
     #print(response.json())
     data = response.json()
-    session['data'] = jason.dumps(data)
+    session['data'] = json.dumps(data)
     cords = data["statewise"]
     #print(cords)
     print(cords[0]["state"])
