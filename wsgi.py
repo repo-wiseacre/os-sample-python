@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+import os
 from flask import Flask
 from flask import request
 import requests
@@ -10,6 +10,7 @@ from termcolor import colored
 from punisher import publish
 
 application = Flask(__name__)
+application.secret_key = os.urandom(25)
 
 #data={}
 #innerHTML = ""
@@ -37,42 +38,10 @@ def covidDataUpdate():
     print("Hello world!")
     #print(response.json())
     #data = raw
-    global data
-    data.clear()
-    print("type of data",type(data))
+    
     data = json.loads(raw)
-    global dict_innerHTML
-    dict_innerHTML.clear()
-    global dict_state
-    dict_state.clear()
-    cords = data["statewise"]
-    #print(cords)
-    print(cords[0]["state"])
-
-    for covid in data['statewise']:
-        covidkeys = covid.keys()
-        innerHTML=""
-        for key in covidkeys:
-            innerHTMLobj = "<tr><td>{labels:}: </td><td>{values:}</td></tr>"
-            formattedinnerHTMLobj = innerHTMLobj.format(labels=key, values=covid[key])
-            #print(formattedinnerHTMLobj)
-            innerHTML += formattedinnerHTMLobj
-            #print(innerHTML)
-        dict_innerHTML[covid["statecode"]] = innerHTML
-        
-        dict_state[covid["statecode"]] = covid["state"]
-    #print(innerHTML)
-    
-    #print(innerHTML)
-    global optionlist
-    for keys in dict_state:
-        print(dict_state[keys])
-        optionlistobj="<option value={key:}>{value:}</option>"
-        formattedoptionlistobj = optionlistobj.format(key=keys, value=dict_state[keys])
-        optionlist += formattedoptionlistobj
-    
-    formatteddropdown = dropdown.format(options=optionlist)
-    print(colored('==========================new[]record===========================', 'green', 'on_red'))
+    print("type of data",type(data))
+    session['data'] = data
     print(raw)
     
     return json.dumps({'errors': "errors"})
@@ -128,6 +97,36 @@ def getcovidDataUpdate():
 
 @application.route('/state', methods=['GET'])
 def covidstate():
+    data = session['data']
+    cords = data["statewise"]
+    #print(cords)
+    print(cords[0]["state"])
+
+    for covid in data['statewise']:
+        covidkeys = covid.keys()
+        innerHTML=""
+        for key in covidkeys:
+            innerHTMLobj = "<tr><td>{labels:}: </td><td>{values:}</td></tr>"
+            formattedinnerHTMLobj = innerHTMLobj.format(labels=key, values=covid[key])
+            #print(formattedinnerHTMLobj)
+            innerHTML += formattedinnerHTMLobj
+            #print(innerHTML)
+        dict_innerHTML[covid["statecode"]] = innerHTML
+        
+        dict_state[covid["statecode"]] = covid["state"]
+    #print(innerHTML)
+    
+    #print(innerHTML)
+    global optionlist
+    for keys in dict_state:
+        print(dict_state[keys])
+        optionlistobj="<option value={key:}>{value:}</option>"
+        formattedoptionlistobj = optionlistobj.format(key=keys, value=dict_state[keys])
+        optionlist += formattedoptionlistobj
+    
+    formatteddropdown = dropdown.format(options=optionlist)
+    print(colored('==========================new[]record===========================', 'green', 'on_red'))
+    
     stateOption=request.args.get('stateOption')
     statecode = stateOption
     print(statecode)
