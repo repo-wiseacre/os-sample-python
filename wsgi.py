@@ -64,7 +64,7 @@ def getcovidDataUpdate():
     data = raw
 
     cords = data["statewise"]
-    #print(cords)
+    print(cords)
     print(cords[0]["state"])
 
     for covid in data['statewise']:
