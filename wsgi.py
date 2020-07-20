@@ -100,12 +100,12 @@ def covidstate():
     print("Inside covidstate-------")
     session_data = session.get('data')
     print(session_data)
-    data = json.dumps(session_data['statewise'])
+    data = session_data['statewise']
     print(json.dumps(data))
-    cords = json.dumps(data)
-    print(json.loads(cords)[0]["state"])
+    cords = data
+    print(data[0]["state"])
 
-    for covid in data['statewise']:
+    for covid in session_data['statewise']:
         covidkeys = covid.keys()
         innerHTML=""
         for key in covidkeys:
