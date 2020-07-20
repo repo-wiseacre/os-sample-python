@@ -97,6 +97,7 @@ def getcovidDataUpdate():
 
 @application.route('/state', methods=['GET'])
 def covidstate():
+    print("Inside covidstate-------")
     session_data = session.get('data')
     print(session_data)
     cords = data["statewise"]
