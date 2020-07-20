@@ -153,8 +153,8 @@ def covid():
     print("Hello world!")
     #print(response.json())
     data = response.json()
-    session['data'] = json.dumps(data['statewise'])
-    cords = {'statewise':data["statewise"]}
+    session['data'] = {'statewise':data["statewise"]}
+    cords = data["statewise"]
     #print(cords)
     print(cords[0]["state"])
 
