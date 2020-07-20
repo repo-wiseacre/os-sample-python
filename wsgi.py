@@ -100,7 +100,7 @@ def covidstate():
     print("Inside covidstate-------")
     session_data = session.get('data')
     print(session_data)
-    cords = session_data
+    cords = json.dumps(session_data)
     #print(cords)
     print(cords[0]["state"])
 
