@@ -101,8 +101,8 @@ def covidstate():
     session_data = session.get('data')
     print(session_data)
     cords = json.dumps(session_data['statewise'])
-    print(cords.json())
-    print(cords.json()[0]["state"])
+    print(json.load(cords))
+    print(json.load(cords)[0]["state"])
 
     for covid in data['statewise']:
         covidkeys = covid.keys()
