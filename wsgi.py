@@ -42,6 +42,7 @@ def covidDataUpdate():
     data = json.loads(raw)
     print("type of data",type(data))
     session['data'] = raw
+    session['data'] = {'statewise':raw["statewise"]}
     print(raw)
     
     return json.dumps({'errors': "errors"})
