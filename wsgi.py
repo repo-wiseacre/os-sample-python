@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import os
-from flask import Flask
+from flask import Flask, session
 from flask import request
 import requests
 import json
