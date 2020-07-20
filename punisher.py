@@ -69,7 +69,7 @@ class publish:
 
     def callServerAPI(self):
         parampost = "{params}"
-        formattedparam = parampost.format(params = json.dumps(self.response.json()['statewise']))
+        formattedparam = parampost.format(params = json.dumps(self.response.json()))
         param={'raw':formattedparam}
         response = requests.post("http://flask-requests-json-meessage.apps.us-east-1.starter.openshift-online.com/rawpost",data=param)
 
