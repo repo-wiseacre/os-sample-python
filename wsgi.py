@@ -14,8 +14,8 @@ application.secret_key = os.urandom(25)
 
 #data={}
 #innerHTML = ""
-#dict_innerHTML = {}
-#dict_state = {}
+dict_innerHTML = {}
+dict_state = {}
 
 dropdown = "<tr><td><select class='dropdown' name='stateOption' id='idStateOption'>{options:}</select></td><tr>"
 optionlist = ""
