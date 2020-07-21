@@ -7,7 +7,7 @@
     <body>
         <div>
             <form action="/state" id="get"></form>
-            <select name="states" form="get">
+            <select name="stateOption" form="get">
                 {% for covids in data['statewise'] %}
                     <option value= "{{covids['statecode']}}">{{covids['state']}}</option>
                 {% endfor %}
