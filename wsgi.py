@@ -105,8 +105,13 @@ session_data={}
 @application.route('/state', methods=['GET'])
 def covidstate():
     print("Inside covidstate-------")
-    
-    if session.get('rawpost') != None :
+    print("----------------------------------------")
+    print(session.get('rawpost'))
+    print("----------------------------------------")
+    print(session.get('data')
+    print("----------------------------------------")
+    obj = session.get('rawpost')
+    if bool(obj) :
         print("----------------rawpost----------------")
         print(session.get('rawpost'))
         session_data = session.get('rawpost')
