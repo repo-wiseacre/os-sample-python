@@ -162,16 +162,10 @@ def covid():
     cords = data["statewise"]
     #print(cords)
     print(cords[0]["state"])
-
+    covidkeys={}
     for covid in data['statewise']:
         covidkeys = covid.keys()
         innerHTML=""
-        for key in covidkeys:
-            innerHTMLobj = "<tr><td>{labels:}: </td><td>{values:}</td></tr>"
-            formattedinnerHTMLobj = innerHTMLobj.format(labels=key, values=covid[key])
-            #print(formattedinnerHTMLobj)
-            innerHTML += formattedinnerHTMLobj
-            #print(innerHTML)
         dict_innerHTML[covid["statecode"]] = innerHTML
         dict_state[covid["statecode"]] = covid["state"]
     #print(innerHTML)
@@ -188,7 +182,7 @@ def covid():
     #html_snippet = ""
     html_snippet="<head>covid results {heading:}</head><head><link rel='stylesheet' href='../dropdown.css'></head><body><form action='/state' method='get'><table><tr><td>Select state </td></tr>{select:}<tr><td>{innerHTMLS:}</td></tr><tr><td><input type='submit' value='submit state'></td><tr></table></form></body>"
 
-    formattedhtml_snippet = html_snippet.format(heading="statewise", select=formatteddropdown ,innerHTMLS=dict_innerHTML["TT"])
+    formattedhtml_snippet = html_snippet.format(heading="statewise", covid=covid, select=formatteddropdown ,innerHTMLS=dict_innerHTML["TT"])
 
     #print(html_snippet)
 
