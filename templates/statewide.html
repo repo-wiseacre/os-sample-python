@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Covid19 Results</title>
+    </head>
+    <body>
+        <table>
+            <tr>
+            {% for key in state.keys() %}
+                <tr><td>{{key}}</td> <td>{{state[key]}}</td></tr>
+            {% endfor %}
+            </tr>
+        </table>
+        <div>
+            COVID 19 Results
+        </div
+    </select>
+    </body>
+</html>
