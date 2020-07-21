@@ -105,7 +105,7 @@ def covidstate():
     print(json.dumps(data))
     cords = data
     print(data[0]["state"])
-
+    dict_statewise={}
     for covid in session_data['statewise']:
         covidkeys = covid.keys()
         innerHTML=""
@@ -144,7 +144,7 @@ def covidstate():
 
     formattedhtml_snippet = html_snippet.format(heading="statewise" ,innerHTMLS=innerHTML)
     
-    return render_template('statewise.html', heading="statewise", state=dict_statewise['TT'])
+    return render_template('statewise.html', heading="statewise", state=dict_statewise[statecode])
 
 
     #return formattedhtml_snippet
