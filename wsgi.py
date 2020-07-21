@@ -108,7 +108,7 @@ def covidstate():
     print("----------------------------------------")
     print(session.get('rawpost'))
     print("----------------------------------------")
-    print(session.get('data')
+    print(session.get('data'))
     print("----------------------------------------")
     obj = session.get('rawpost')
     if bool(obj) :
