@@ -130,7 +130,11 @@ def covidstate():
                 innerHTML += formattedinnerHTMLobj
                 #print(innerHTML)
             #dict_innerHTML[covid["statecode"]] = innerHTML
-            dict_statewise[covid["statecode"]] = covid
+            dict_statewise[covid['statecode']] = covid
+            print("-----------------------from dict_statewise--------------------------")
+            print(dict_statewise['statecode'])
+            print(vivid)
+            print("--------------------------------------------------------------------")
             #dict_state[covid["statecode"]] = covid["state"]
         #print(innerHTML)
 
