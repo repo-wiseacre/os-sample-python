@@ -31,6 +31,7 @@ def covidDataUpdate():
     print(type(request.form['raw']))
     print(request.form['raw'])
     raw=request.form['raw']
+    session_data = session.get('data')
     if bool(raw) :
         
         print(colored(request, 'red', 'on_white')) # should display 'bar'
@@ -46,7 +47,9 @@ def covidDataUpdate():
         session['rawpost'] = {'statewise':raw["statewise"]}
         session['data'] = {'statewise':raw["statewise"]}
         print(raw)
-    
+    else :
+        session['data'] = session_data
+        
     return json.dumps({'errors': "errors"})
 
 @application.route('/raw', methods=['GET'])
