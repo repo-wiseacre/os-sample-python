@@ -162,8 +162,9 @@ def covid():
     cords = data["statewise"]
     #print(cords)
     print(cords[0]["state"])
-    covidkeys={}
+    covids={}
     for covid in data['statewise']:
+        covids = covid
         covidkeys = covid.keys()
         innerHTML=""
         dict_innerHTML[covid["statecode"]] = innerHTML
@@ -182,7 +183,7 @@ def covid():
     #html_snippet = ""
     html_snippet="<head>covid results {heading:}</head><head><link rel='stylesheet' href='../dropdown.css'></head><body><form action='/state' method='get'><table><tr><td>Select state </td></tr>{select:}<tr><td>{innerHTMLS:}</td></tr><tr><td><input type='submit' value='submit state'></td><tr></table></form></body>"
 
-    formattedhtml_snippet = html_snippet.format(heading="statewise", covid=covid, select=formatteddropdown ,innerHTMLS=dict_innerHTML["TT"])
+    formattedhtml_snippet = html_snippet.format(heading="statewise", covids=covids, select=formatteddropdown ,innerHTMLS=dict_innerHTML["TT"])
 
     #print(html_snippet)
 
