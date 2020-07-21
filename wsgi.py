@@ -31,7 +31,7 @@ def covidDataUpdate():
     print(type(request.form['raw']))
     print(request.form['raw'])
     raw=request.form['raw']
-    if raw != None :
+    if bool(raw) :
         
         print(colored(request, 'red', 'on_white')) # should display 'bar'
 
@@ -103,18 +103,18 @@ session_data={}
 def covidstate():
     print("Inside covidstate-------")
     
-    if session.get('data') != None :
-        print("----------------data----------------")
-        print(session.get('data'))
-        session_data = session.get('data')
+    if session.get('rawpost') != None :
+        print("----------------rawpost----------------")
+        print(session.get('rawpost'))
+        session_data = session.get('rawpost')
         print("--------session_data_loaded_from_session------------------")
         print(session_data)
         data = session_data['statewise']
         print(json.dumps(data))
     else :
-        print("----------------rawpost-----------")
-        print(session.get('rawpost'))
-        session_data = session.get('rawpost')
+        print("----------------data----------------")
+        print(session.get('data'))
+        session_data = session.get('data')
     #cords = data
     #print(data[0]["state"])
     dict_statewise={}
