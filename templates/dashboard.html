@@ -8,9 +8,7 @@
         <div>
             <select name= states method="GET" action="/state">
                 {% for covids in data['statewise'] %}
-                    {% for covid in covids %}
-                        <option value= "{{covid['statecode']}}" SELECTED>{{covid['state']}}</option>"
-                    {% endfor %}
+                    <option value= "{{covids['statecode']}}" SELECTED>{{covids['state']}}</option>"
                 {% endfor %}
             </select>
         </div>
