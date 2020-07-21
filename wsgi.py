@@ -103,7 +103,7 @@ session_data={}
 def covidstate():
     print("Inside covidstate-------")
     
-    if session_data != None :
+    if session.get('data') != None :
         session_data = session.get('data')
         print(session_data)
         data = session_data['statewise']
