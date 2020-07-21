@@ -47,8 +47,6 @@ def covidDataUpdate():
         session['rawpost'] = {'statewise':raw["statewise"]}
         session['data'] = {'statewise':raw["statewise"]}
         print(raw)
-    else :
-        session['data'] = session_data
         
     return json.dumps({'errors': "errors"})
 
