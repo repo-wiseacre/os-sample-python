@@ -7,18 +7,18 @@
     <body>
         <div>
             <select name= states method="GET" action="/state">
-                {% for key in covids.keys() %}
-                <option value= "{{key}}" SELECTED>{{covids[key]}}</option>"
+                {% for statecode, state in covids %}
+                <option value= "{{statecode}}" SELECTED>{{state}}</option>"
                 {% endfor %}
             </select>
         </div>
-        <div>
+        <table>
             <tr>
-            {% for key in covids.keys() %}
-                <tr><td>{{key}}</td> <td>{{covids[key]}}</td></tr>
+            {% for key,value in data %}
+                <tr><td>{{key}}</td> <td>{{covid[key]}}</td></tr>
             {% endfor %}
             </tr>
-        </div>
+        </table>
         <div>
             <head>covid results {heading}</head><body><table><tr><td>Select state </td></tr>{select}{innerHTMLS}</table></body>
         </div
