@@ -195,7 +195,7 @@ def covid():
     #stdout,stderr = out.communicate()
     #print(stdout)
     #print(stderr)
-    return render_template('dashboard.html', heading="statewise", data=data['statewise'], covids=covids, select=formatteddropdown ,innerHTMLS=dict_innerHTML["TT"])
+    return render_template('dashboard.html', heading="statewise", data=session.get('data'), select=formatteddropdown ,innerHTMLS=dict_innerHTML["TT"])
     #return formattedhtml_snippet
 
 
