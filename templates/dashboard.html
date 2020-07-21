@@ -6,9 +6,9 @@
     </head>
     <body>
         <div>
-            <select name= colours method="GET" action="/">
-                {% for colour in colours %}
-                <option value= "{{colour}}" SELECTED>{{colours}}</option>"
+            <select name= states method="GET" action="/state">
+                {% for key in covidkeys %}
+                <option value= "{{key}}" SELECTED>{{covidkeys[key]}}</option>"
                 {% endfor %}
             </select>
         </div>
