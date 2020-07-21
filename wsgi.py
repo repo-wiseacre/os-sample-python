@@ -115,34 +115,12 @@ def covidstate():
             #print(formattedinnerHTMLobj)
             innerHTML += formattedinnerHTMLobj
             #print(innerHTML)
-        dict_innerHTML[covid["statecode"]] = innerHTML
+        #dict_innerHTML[covid["statecode"]] = innerHTML
         dict_statewise[covid["statecode"]] = covid
-        dict_state[covid["statecode"]] = covid["state"]
+        #dict_state[covid["statecode"]] = covid["state"]
     #print(innerHTML)
     
     #print(innerHTML)
-    global optionlist
-    for keys in dict_state:
-        print(dict_state[keys])
-        optionlistobj="<option value={key:}>{value:}</option>"
-        formattedoptionlistobj = optionlistobj.format(key=keys, value=dict_state[keys])
-        optionlist += formattedoptionlistobj
-    
-    formatteddropdown = dropdown.format(options=optionlist)
-    print(colored('==========================new[]record===========================', 'green', 'on_red'))
-    
-    stateOption=request.args.get('stateOption')
-    statecode = stateOption
-    print(statecode)
-    statename = dict_state[statecode]
-    print(statename)
-    innerHTML = dict_innerHTML[statecode]
-    print(innerHTML)
-    html_snippet = "<head><title>HTML in 10 Simple Steps or Less</title><meta http-equiv='refresh' content='5' /></head>"
-    #html_snippet = ""
-    html_snippet+="<head>covid results {heading:}</head><body><table><tr><td>Select state </td></tr>{select:}{innerHTMLS:}</table></body>"
-
-    formattedhtml_snippet = html_snippet.format(heading="statewise" ,innerHTMLS=innerHTML)
     
     return render_template('statewise.html', heading="statewise", state=dict_statewise[statecode])
 
