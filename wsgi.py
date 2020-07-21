@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import os
-from flask import Flask, session
+from flask import Flask, session, render_template
 from flask import request
 import requests
 import json
@@ -142,9 +142,12 @@ def covidstate():
     #html_snippet = ""
     html_snippet+="<head>covid results {heading:}</head><body><table><tr><td>Select state </td></tr>{select:}{innerHTMLS:}</table></body>"
 
-    formattedhtml_snippet = html_snippet.format(heading="statewise", select=formatteddropdown ,innerHTMLS=innerHTML)
+    formattedhtml_snippet = html_snippet.format(heading="statewise" ,innerHTMLS=innerHTML)
+    
+    return render_template('dashboard.html', heading="statewise", select=formatteddropdown ,innerHTMLS=dict_innerHTML["TT"])
 
-    return formattedhtml_snippet
+
+    #return formattedhtml_snippet
 
 
 
