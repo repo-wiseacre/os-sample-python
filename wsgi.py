@@ -121,6 +121,9 @@ def covidstate():
     #print(innerHTML)
     
     #print(innerHTML)
+    stateOption=request.args.get('stateOption')
+    statecode = stateOption
+    print(statecode)
     
     return render_template('statewise.html', heading="statewise", state=dict_statewise[statecode])
 
