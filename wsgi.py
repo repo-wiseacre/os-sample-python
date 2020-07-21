@@ -79,8 +79,8 @@ def getcovidDataUpdate():
             #print(formattedinnerHTMLobj)
             innerHTML += formattedinnerHTMLobj
             #print(innerHTML)
-        dict_innerHTML[covid["statecode"]] = innerHTML
-        dict_state[covid["statecode"]] = covid["state"]
+        dict_innerHTML[covid['statecode']] = innerHTML
+        dict_state[covid['statecode']] = covid["state"]
     #print(innerHTML)
     global optionlist
     for keys in dict_state:
@@ -133,8 +133,9 @@ def covidstate():
             #dict_innerHTML[covid["statecode"]] = innerHTML
             dict_statewise[covid['statecode']] = covid
             print("-----------------------from dict_statewise--------------------------")
-            print(dict_statewise['statecode'])
-            print(vivid)
+            print(covid['statecode'])
+            print(covid)
+            print(dict_statewise[covid['statecode']])
             print("--------------------------------------------------------------------")
             #dict_state[covid["statecode"]] = covid["state"]
         #print(innerHTML)
