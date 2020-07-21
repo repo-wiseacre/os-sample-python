@@ -31,19 +31,20 @@ def covidDataUpdate():
     print(type(request.form['raw']))
     print(request.form['raw'])
     raw=request.form['raw']
-    print(colored(request, 'red', 'on_white')) # should display 'bar'
+    if raw != None :
+        
+        print(colored(request, 'red', 'on_white')) # should display 'bar'
 
-    print("hello called....")
-    #response  = requests.get("https://api.covid19india.org/data.json")
-    print("Hello world!")
-    #print(response.json())
-    #data = raw
-    
-    data = json.loads(raw)
-    print("type of data",type(data))
-    session['data'] = raw
-    session['data'] = {'statewise':raw["statewise"]}
-    print(raw)
+        print("hello called....")
+        #response  = requests.get("https://api.covid19india.org/data.json")
+        print("Hello world!")
+        #print(response.json())
+        #data = raw
+        #data = json.loads(raw)
+        #print("type of data",type(data))
+        #session['data'] = raw
+        session['data'] = {'statewise':raw["statewise"]}
+        print(raw)
     
     return json.dumps({'errors': "errors"})
 
