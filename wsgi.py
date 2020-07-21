@@ -107,6 +107,7 @@ def covidstate():
         print("----------------data----------------")
         print(session.get('data'))
         session_data = session.get('data')
+        print("--------session_data_loaded_from_session------------------")
         print(session_data)
         data = session_data['statewise']
         print(json.dumps(data))
@@ -117,7 +118,7 @@ def covidstate():
     #cords = data
     #print(data[0]["state"])
     dict_statewise={}
-    if not bool(session_data) :
+    if bool(session_data) :
         print("------------------session_data--------------------")
         print(session_data)
         for covid in session_data['statewise']:
