@@ -117,7 +117,7 @@ def covidstate():
     #cords = data
     #print(data[0]["state"])
     dict_statewise={}
-    if session_data != None
+    if not bool(session_data) :
         print("------------------session_data--------------------")
         print(session_data)
         for covid in session_data['statewise']:
