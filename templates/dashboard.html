@@ -7,7 +7,7 @@
     <body>
         <div>
             <select name= states method="GET" action="/state">
-                {% for statecode, state in covids %}
+                {% for statecode, state in data %}
                 <option value= "{{statecode}}" SELECTED>{{state}}</option>"
                 {% endfor %}
             </select>
