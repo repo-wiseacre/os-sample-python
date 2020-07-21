@@ -163,11 +163,13 @@ def covid():
     #print(cords)
     print(cords[0]["state"])
     covids={}
+    dict_statewise={}
     for covid in data['statewise']:
         covids = covid
         covidkeys = covid.keys()
         innerHTML=""
         dict_innerHTML[covid["statecode"]] = innerHTML
+        dict_statewise[covid["statecode"]] = covid
         dict_state[covid["statecode"]] = covid["state"]
     #print(innerHTML)
     global optionlist
@@ -195,7 +197,7 @@ def covid():
     #stdout,stderr = out.communicate()
     #print(stdout)
     #print(stderr)
-    return render_template('dashboard.html', heading="statewise", data=session.get('data'), select=formatteddropdown ,innerHTMLS=dict_innerHTML["TT"])
+    return render_template('dashboard.html', heading="statewise", data=session.get('data'), state=dict_statewise['TT'] select=formatteddropdown ,innerHTMLS=dict_innerHTML["TT"])
     #return formattedhtml_snippet
 
 
