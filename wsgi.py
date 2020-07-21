@@ -117,21 +117,24 @@ def covidstate():
     #cords = data
     #print(data[0]["state"])
     dict_statewise={}
-    for covid in session_data['statewise']:
-        covidkeys = covid.keys()
-        innerHTML=""
-        for key in covidkeys:
-            innerHTMLobj = "<tr><td>{labels:}: </td><td>{values:}</td></tr>"
-            formattedinnerHTMLobj = innerHTMLobj.format(labels=key, values=covid[key])
-            #print(formattedinnerHTMLobj)
-            innerHTML += formattedinnerHTMLobj
-            #print(innerHTML)
-        #dict_innerHTML[covid["statecode"]] = innerHTML
-        dict_statewise[covid["statecode"]] = covid
-        #dict_state[covid["statecode"]] = covid["state"]
-    #print(innerHTML)
-    
-    #print(innerHTML)
+    if session_data != None
+        print("------------------session_data--------------------")
+        print(session_data)
+        for covid in session_data['statewise']:
+            covidkeys = covid.keys()
+            innerHTML=""
+            for key in covidkeys:
+                innerHTMLobj = "<tr><td>{labels:}: </td><td>{values:}</td></tr>"
+                formattedinnerHTMLobj = innerHTMLobj.format(labels=key, values=covid[key])
+                #print(formattedinnerHTMLobj)
+                innerHTML += formattedinnerHTMLobj
+                #print(innerHTML)
+            #dict_innerHTML[covid["statecode"]] = innerHTML
+            dict_statewise[covid["statecode"]] = covid
+            #dict_state[covid["statecode"]] = covid["state"]
+        #print(innerHTML)
+
+        #print(innerHTML)
     stateOption=request.args.get('stateOption')
     statecode = stateOption
     print(statecode)
