@@ -7,15 +7,19 @@
     <body>
         <div>
             <select name= states method="GET" action="/state">
-                {% for covid in data['statewise'] %}
-                <option value= "{{covid['statecode']}}" SELECTED>{{covid['state']}}</option>"
+                {% for covids in data['statewise'] %}
+                    {% for covid in covids %}
+                        <option value= "{{covid['statecode']}}" SELECTED>{{covid['state']}}</option>"
+                    {% endfor %}
                 {% endfor %}
             </select>
         </div>
         <table>
             <tr>
-            {% for key,value in data['statewise'] %}
-                <tr><td>{{key}}</td> <td>{{covid[key]}}</td></tr>
+            {% for covids in data['statewise'] %}
+                {% for key,value in covids %}
+                    <tr><td>{{key}}</td> <td>{{value}}</td></tr>
+                {% endfor %}
             {% endfor %}
             </tr>
         </table>
