@@ -17,8 +17,8 @@
         <table>
             <tr>
             {% for covids in data['statewise'] %}
-                {% for key,value in covids %}
-                    <tr><td>{{key}}</td> <td>{{value}}</td></tr>
+                {% for key in covids.keys() %}
+                    <tr><td>{{key}}</td> <td>{{covids[key]}}</td></tr>
                 {% endfor %}
             {% endfor %}
             </tr>
