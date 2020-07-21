@@ -32,11 +32,13 @@ def covidDataUpdate():
     print(request.form['raw'])
     raw=request.form['raw']
     session_data = session.get('data')
+    print("----------------from rawpost-session_data------------------")
+    print(session_data)
     if bool(raw) :
         
         print(colored(request, 'red', 'on_white')) # should display 'bar'
 
-        print("hello called....")
+        print("raw post....")
         #response  = requests.get("https://api.covid19india.org/data.json")
         print("Hello world!")
         #print(response.json())
