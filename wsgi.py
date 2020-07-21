@@ -144,7 +144,7 @@ def covidstate():
 
     formattedhtml_snippet = html_snippet.format(heading="statewise" ,innerHTMLS=innerHTML)
     
-    return render_template('dashboard.html', heading="statewise", select=formatteddropdown ,innerHTMLS=dict_innerHTML["TT"])
+    return render_template('statewise.html', heading="statewise", state=dict_statewise['TT'])
 
 
     #return formattedhtml_snippet
