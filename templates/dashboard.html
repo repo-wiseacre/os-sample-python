@@ -13,6 +13,13 @@
             </select>
         </div>
         <div>
+            <tr>
+            {% for key in covids.keys() %}
+                <tr><td>{{key}}</td> <td>{{covids[key]}}</td></tr>
+            {% endfor %}
+            </tr>
+        </div>
+        <div>
             <head>covid results {heading}</head><body><table><tr><td>Select state </td></tr>{select}{innerHTMLS}</table></body>
         </div
     </select>
