@@ -43,6 +43,7 @@ def covidDataUpdate():
         #data = json.loads(raw)
         #print("type of data",type(data))
         #session['data'] = raw
+        session['rawpost'] = {'statewise':raw["statewise"]}
         session['data'] = {'statewise':raw["statewise"]}
         print(raw)
     
@@ -101,11 +102,14 @@ session_data={}
 @application.route('/state', methods=['GET'])
 def covidstate():
     print("Inside covidstate-------")
-    session_data = session.get('data')
+    
     if session_data != None :
+        session_data = session.get('data')
         print(session_data)
         data = session_data['statewise']
         print(json.dumps(data))
+    else :
+        session_data = session.get('rawpost')
     #cords = data
     #print(data[0]["state"])
     dict_statewise={}
