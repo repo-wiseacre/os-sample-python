@@ -104,11 +104,15 @@ def covidstate():
     print("Inside covidstate-------")
     
     if session.get('data') != None :
+        print("----------------data----------------")
+        print(session.get('data'))
         session_data = session.get('data')
         print(session_data)
         data = session_data['statewise']
         print(json.dumps(data))
     else :
+        print("----------------rawpost-----------")
+        print(session.get('rawpost'))
         session_data = session.get('rawpost')
     #cords = data
     #print(data[0]["state"])
