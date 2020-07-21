@@ -15,10 +15,8 @@
         </div>
         <table>
             <tr>
-            {% for covids in data['statewise'] %}
-                {% for key in covids.keys() %}
-                    <tr><td>{{key}}</td> <td>{{covids[key]}}</td></tr>
-                {% endfor %}
+            {% for key in state.keys() %}
+                <tr><td>{{key}}</td> <td>{{state[key]}}</td></tr>
             {% endfor %}
             </tr>
         </table>
