@@ -6,12 +6,14 @@
     </head>
     <body>
         <div>
-            <select name="states" method="GET" action="/state">
-                
+            <form action="/state" id="get"></form>
+            <select name="states" form="get">
                 {% for covids in data['statewise'] %}
                     <option value= "{{covids['statecode']}}">{{covids['state']}}</option>
                 {% endfor %}
             </select>
+            <input type="submit" value="Submit" form="get"></input>
+
         </div>
         <table>
             <tr>
