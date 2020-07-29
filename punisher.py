@@ -66,7 +66,7 @@ class publish:
         print("date and time =", dt_string)	
         print(colored(status+':'+dt_string, 'green', 'on_white'))
 
-        if status=="updated" :
+        #if status=="updated" :
             self.publishAPIMessage()
 
         return returns
