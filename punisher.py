@@ -83,6 +83,7 @@ class publish:
         parampost = "{params}"
         formattedparam = parampost.format(params = json.dumps(self.response.json()))
         param={'raw':formattedparam}
+        self.EXCHANGE=''
         self.channel.queue_declare(queue=self.pub_queue_name, durable=True)
         self.ROUTING_KEY = self.pub_queue_name
         self.channel.basic_publish(self.EXCHANGE, self.ROUTING_KEY,json.dumps(param, ensure_ascii=False))
