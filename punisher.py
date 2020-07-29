@@ -85,7 +85,7 @@ class publish:
         param={'raw':formattedparam}
         self.channel.queue_declare(queue=self.pub_queue_name, durable=True)
         self.ROUTING_KEY = self.pub_queue_name
-        self._channel.basic_publish(self.EXCHANGE, self.ROUTING_KEY,json.dumps(param, ensure_ascii=False))
+        self.channel.basic_publish(self.EXCHANGE, self.ROUTING_KEY,json.dumps(param, ensure_ascii=False))
 
 def main(argv):
     print("argvs ",argv)
