@@ -7,15 +7,19 @@ import json
 from termcolor import colored
 class publish:
 
-    def __init__(self,queue_name):
+    def __init__(self,consume_queue_name, publish_queue_name):
+        self.con_queue_name = consume_queue_name
+        self.pub_queue_name = publish_queue_name
         self.response = requests.get("https://api.covid19india.org/data.json")
         self.connection = pika.BlockingConnection(pika.URLParameters("amqp://fovucomg:iXDPcLo0zLE4tcjYU-fKZAIyxeXv2143@codfish.rmq.cloudamqp.com/fovucomg"))
         #self.connection = pika.BlockingConnection(pika.URLParameters(os.environ.get("CLOUDAMQP_URI"))
         self.channel = self.connection.channel()
-        self.channel.queue_declare(queue=queue_name, durable=True)
+        self.channel.queue_declare(queue=consume_queue_name, durable=True)
+        self.channel.queue_declare(queue=publish_queue_name, durable=True)
 
-    def start(self, queue_name):
-        self.channel.basic_consume(queue=queue_name, on_message_callback=self.callback, auto_ack=True)
+    def start(self):
+        
+        self.channel.basic_consume(queue=self.con_queue_name, on_message_callback=self.callback, auto_ack=True)
         print(' [*] Waiting for messages. To exit press CTRL+C')
         self.channel.start_consuming()
     
@@ -63,7 +67,7 @@ class publish:
         print(colored(status+':'+dt_string, 'green', 'on_white'))
 
         if status=="updated" :
-            self.callServerAPI()
+            self.publishAPIMessage()
 
         return returns
 
@@ -72,15 +76,23 @@ class publish:
         formattedparam = parampost.format(params = json.dumps(self.response.json()))
         param={'raw':formattedparam}
         response = requests.post("http://flask-requests-json-meessage.apps.us-east-1.starter.openshift-online.com/rawpost",data=param)
+        
+    def publishAPIMessage(self):
+        parampost = "{params}"
+        formattedparam = parampost.format(params = json.dumps(self.response.json()))
+        param={'raw':formattedparam}
+        self.channel.queue_declare(queue=self.pub_queue_name, durable=True)
+        self.ROUTING_KEY = self.pub_queue_name
+        self._channel.basic_publish(self.EXCHANGE, self.ROUTING_KEY,json.dumps(param, ensure_ascii=False))
 
 def main(argv):
     print("argvs ",argv)
-    msg = publish("sample_rabbit_queue")
+    msg = publish("callAPIRequest","consumeAPIResponse")
     msg.callAPI()
     if argv == "start" :
-        msg.start("sample_rabbit_queue")
+        msg.start()
     if argv=="stop" :
-        msg.stop("sample_rabbit_queue")
+        msg.stop("callAPIRequest")
 
 if __name__ == "__main__":
     print("call main function")
