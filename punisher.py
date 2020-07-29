@@ -13,11 +13,11 @@ class publish:
         print(self.con_queue_name)
         print(self.pub_queue_name)
         self.response = requests.get("https://api.covid19india.org/data.json")
-        self.connection = pika.BlockingConnection(pika.URLParameters("amqp://fovucomg:iXDPcLo0zLE4tcjYU-fKZAIyxeXv2143@codfish.rmq.cloudamqp.com/fovucomg"))
-        #self.connection = pika.BlockingConnection(pika.URLParameters(os.environ.get("CLOUDAMQP_URI"))
+        #self.connection = pika.BlockingConnection(pika.URLParameters("amqp://fovucomg:iXDPcLo0zLE4tcjYU-fKZAIyxeXv2143@codfish.rmq.cloudamqp.com/fovucomg"))
+        self.connection = pika.BlockingConnection(pika.URLParameters(os.environ.get("CLOUDAMQP_URI"))
         self.channel = self.connection.channel()
-        self.channel.queue_declare(queue=consume_queue_name, durable=True)
-        self.channel.queue_declare(queue=publish_queue_name, durable=True)
+        self.channel.queue_declare(queue=self.con_queue_name, durable=True)
+        self.channel.queue_declare(queue=self.pub_queue_name, durable=True)
 
     def start(self):
         
